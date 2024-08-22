@@ -76,6 +76,61 @@
           margin-bottom: 20px;
           font-size: 1rem;
           color: #cccccc;
+        }      
+         .footer {
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 50px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 3in;
+        }
+
+        .footer-logo {
+            max-width: 200px;
+            max-height: 200px;
+            width: auto;
+            height: auto;
+            /* padding-bottom: 13%; */
+            padding-left: 20%;
+            bottom:0%;
+            position: absolute;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: calc(100% - 50px); /* Adjust this width based on logo size */
+            padding-left: 10%;
+        }
+
+        .footer-links div {
+            margin-right: 30px;
+            flex: 1;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links ul li a:hover {
+            text-decoration: underline;
         }
       </style>
 
@@ -102,7 +157,7 @@
             <a class="nav-link" href="#music">Music</a>
             <a class="nav-link" href="#sample-packs">Sample Packs</a>
             <a class="nav-link" href="#contact">Contact</a>
-            <a class="nav-link" href="tel:+123456789"><i class="fas fa-phone"></i></a>
+
             <a class="nav-link" href="mailto:example@gmail.com"><i class="fas fa-envelope"></i></a>
             <a class="nav-link" href="https://github.com/"><i class="fab fa-github"></i></a>
           </div>
@@ -120,7 +175,55 @@
             <p>Drop your video files here</p>
         </div>
     </div>
+
+    <footer class="footer">
+      <img src="./logo.svg" alt="Logo" class="footer-logo"> <!-- Replace 'your-logo.png' with your actual logo file -->
+      <div class="footer-links">
+          <div>
+              <ul>
+                  <li><a href="https://soundcloud.com/user-999486594">Soundcloud</a></li>
+                  <li><a href="https://github.com/Kohlyde">GitHub</a></li>
+                  <li><a href="https://soundcloud.com/user-999486594">Facebook</a></li>
+                  <li><a href="https://soundcloud.com/user-999486594">Twitch</a></li>
+                  <li><a href="https://soundcloud.com/user-999486594">Purchase Songs</a></li>
+                  <li><a href="https://soundcloud.com/user-999486594">Song Player</a></li>
+              </ul>
+          </div>
+          <div>
+              
+              <ul>
+                  <li><a href="raster.html" target="_blank">Raster Converter</a></li>
+                  <li><a href="vector.html" target="_blank">Vector Converter</a></li>
+                  <li><a href="audio.html" target="_blank">Audio Converter</a></li>
+                  <li><a href="video.html" target="_blank">Video Converter</a></li>
+                  <li><a href="code.html" target="_blank">Code Converter</a></li>
+              </ul>
+
+          </div>
+          <div>
+              
+              <ul>
+                  <li><a href="raster.html" target="_blank">Raster Converter</a></li>
+                  <li><a href="vector.html" target="_blank">Vector Converter</a></li>
+                  <li><a href="audio.html" target="_blank">Audio Converter</a></li>
+                  <li><a href="video.html" target="_blank">Video Converter</a></li>
+                  <li><a href="code.html" target="_blank">Code Converter</a></li>
+              </ul>
+
+          </div>
+          <div>
+              <ul>
+                  <li><a href="OpenSource.html" target="_blank">Open Source</a></li>
+                  <li><a href="PrivacyPolicy.html" target="_blank">Privacy Policy</a></li>
+                  <li><a href="DataPolicy.html" target="_blank">Data Policy</a></li>
+                  <li><a href="OCookiesPolicy.html" target="_blank">Cookies Policy</a></li>
+                  <li><a href="PoliciesPolicy.html" target="_blank">Policies Policy</a></li>
+              </ul>
+          </div>
+      </div>
+  </footer>
     <script>
+      
         async function convertVideo(file) {
             try {
                 const format = document.querySelector('input[name="format"]:checked').value;
