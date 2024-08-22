@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Design</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .footer {
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 50px 420px 2%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 3in;
+        }
+
+        .footer-logo {
+            max-width: 200px;
+            max-height: 200px;
+            width: auto;
+            height: auto;
+            padding-bottom: 13%;
+            padding-left: 20%;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: calc(100% - 50px); /* Adjust this width based on logo size */
+            padding-left: 10%;
+        }
+
+        .footer-links div {
+            margin-right: 30px;
+            flex: 1;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <footer class="footer">
+        <img src="logo.svg" alt="Logo" class="footer-logo"> <!-- Replace 'your-logo.png' with your actual logo file -->
+        <div class="footer-links">
+            <div>
+                <ul>
+                    <li><a href="https://soundcloud.com/user-999486594">Sound Cloud</a></li>
+                    <li><a href="#" target="_blank">Link 5</a></li>
+                    <li><a href="#" target="_blank">Link 6</a></li>
+                </ul>
+            </div>
+            <div>
+                
+                <ul>
+                    <li><a href="raster.html" target="_blank">Raster Converter</a></li>
+                    <li><a href="vector.html" target="_blank">Vector Converter</a></li>
+                    <li><a href="audio.html" target="_blank">Audio Converter</a></li>
+                    <li><a href="video.html" target="_blank">Video Converter</a></li>
+                    <li><a href="code.html" target="_blank">Code Converter</a></li>
+                </ul>
+
+            </div>
+            <div>
+                <ul>
+                    <li><a href="#" target="_blank">Open Source</a></li>
+                    <li><a href="#" target="_blank">Privacy Policy</a></li>
+                    <li><a href="#" target="_blank">Data Policy</a></li>
+                    <li><a href="#" target="_blank">Cookies Policy</a></li>
+                    <li><a href="#" target="_blank">Policies Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
