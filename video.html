@@ -10,128 +10,182 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   
     <style>
-        body {
-          background-color: #121212;
-          color: #ffffff;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          height: 100vh;
-          flex-direction: column;
-         
-        }
+   body {
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding-top: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin-bottom: 30%;
+}
+a{
+  font-size: 14px;
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+  color: #ebd29d !important;
+}
+.navbar-main {
+    width: 100%;
+    margin-top: 0%;
+    position: fixed;
+    background-color: #292929;
+}
 
+.container {
+    width: 80%;
+    max-width: 1000px;
+    text-align: center;
+    padding-top: 5%;
+}
 
-        .navbar-main {
-      width: 100%;
-      margin-top: 0%;
-      background-color: #292929 ;
-    }
-        .container {
-          width: 80%;
-          max-width: 1000px;
-          text-align: center;
-          padding-top: 20px;
-        }
-    
-        h1 {
-          margin-bottom: 10px;
-        }
-    
-        .radio-buttons,
-        .drop-zone {
-          border: 2px dashed #ffffff;
-          padding: 30px;
-          margin-bottom: 20px;
-          transition: background-color 0.3s;
-          border-radius: 8px;
-          width: 100%;
-        }
-    
-        .radio-buttons {
-          display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          gap: 10px;
-        }
-    
-        .radio-buttons label {
-          text-align: left;
-        }
-    
-        .drop-zone {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100%;
-          min-height: 150px;
-        }
-    
-        .drop-zone.drag-over {
-          background-color: rgba(255, 255, 255, 0.1);
-        }
-    
-        .instructions {
-          margin-bottom: 20px;
-          font-size: 1rem;
-          color: #cccccc;
-        }      
-         .footer {
-            width: 100%;
-            background-color: #333;
-            color: #fff;
-            padding: 50px;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 3in;
-        }
+h1 {
+    margin-bottom: 10px;
+}
 
-        .footer-logo {
-            max-width: 200px;
-            max-height: 200px;
-            width: auto;
-            height: auto;
-            /* padding-bottom: 13%; */
-            padding-left: 20%;
-            bottom:0%;
-            position: absolute;
-        }
+.radio-buttons,
+.drop-zone {
+    border: 2px dashed #bdbdbd;
+    padding: 30px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+    border-radius: 8px;
+    width: 100%;
+}
 
-        .footer-links {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            width: calc(100% - 50px); /* Adjust this width based on logo size */
-            padding-left: 10%;
-        }
+.radio-buttons {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+}
 
-        .footer-links div {
-            margin-right: 30px;
-            flex: 1;
-        }
+.radio-buttons label {
+    text-align: left;
+}
 
-        .footer-links ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+.drop-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 150px;
+}
 
-        .footer-links ul li {
-            margin-bottom: 8px;
-        }
+.drop-zone.drag-over {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
-        .footer-links ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-        }
+.instructions {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #cccccc;
+}
 
-        .footer-links ul li a:hover {
-            text-decoration: underline;
-        }
+/* Updated Footer Styles */
+.footer {
+    width: 100%;
+    background-color: #333;
+    color: #c7c7c7;
+    padding: 20px 30.5%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    justify-content: space-evenly;
+    max-height: 2in;
+}
+
+.footer-column {
+    flex: 1;
+    margin:  1px 1px;
+    padding: 1px 1px;
+}
+
+.footer-bar {
+    max-width: 1px;
+    background-color: #ffffff; /* Vertical bar color */
+    /* margin-left:  10% ;
+    margin-right:  10% ; */
+    /* padding-left:  -20% ;
+    padding-right:  -20% ; */
+}
+
+.footer h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer ul li {
+    margin-bottom: 5px;
+}
+
+.footer ul li a {
+    color: #a3a3a3;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.footer ul li a:hover {
+    text-decoration: underline;
+   color: #ebd29d;
+}
+
+.footer-logo {
+    max-width: 100px;
+    min-height: auto;
+    width: auto;
+    height: auto;
+    padding-bottom: 1%;
+    padding-left: 1%;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: calc(100% - 50px); /* Adjust this width based on logo size */
+    padding-left: 10%;
+}
+
+.footer-links div {
+    margin-right: 30px;
+    flex: 1;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 2px;
+}
+
+.footer-links ul li a {
+    color: #a3a3a3;
+    text-decoration: none;
+    font-size: 10px;
+
+}
+
+.footer-links ul li a:hover {
+  color: #ebd29d;
+    text-decoration: underline;
+}
+
       </style>
 
 </head>
@@ -152,11 +206,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
-            <a class="nav-link" href="#home">Home</a>
-            <a class="nav-link" href="#about">About</a>
-            <a class="nav-link" href="#music">Music</a>
-            <a class="nav-link" href="#sample-packs">Sample Packs</a>
-            <a class="nav-link" href="#contact">Contact</a>
+            <a class="nav-link" href="./INDEX.HTML">Home</a>
+        <a class="nav-link" href="./raster.html">Raster</a>
+        <a class="nav-link" href="./vector.html">Vector</a>
+        <a class="nav-link" href="./audio.html">audio</a>
+        <a class="nav-link" href="./video.html">Video</a>
+        <a class="nav-link" href="./code.html">Code</a>
+        <a class="nav-link" href="#">Contact</a>
 
             <a class="nav-link" href="mailto:example@gmail.com"><i class="fas fa-envelope"></i></a>
             <a class="nav-link" href="https://github.com/"><i class="fab fa-github"></i></a>

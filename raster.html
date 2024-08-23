@@ -12,125 +12,134 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
   <style>
-      body {
-        background-color: #121212;
-        color: #ffffff;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        height: 100vh;
-        flex-direction: column;
-       
-      }
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      margin-bottom: 35%;
+
+    }
 
 
-      .navbar-main {
-    width: 100%;
-    margin-top: 0%;
-    background-color: #292929 ;
-  }
-      .container {
-        width: 80%;
-        max-width: 1000px;
-        text-align: center;
-        padding-top: 20px;
-      }
-  
-      h1 {
-        margin-bottom: 10px;
-      }
-  
-      .radio-buttons,
-      .drop-zone {
-        border: 2px dashed #ffffff;
-        padding: 30px;
-        margin-bottom: 20px;
-        transition: background-color 0.3s;
-        border-radius: 8px;
-        width: 100%;
-      }
-  
-      .radio-buttons {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 10px;
-      }
-  
-      .radio-buttons label {
-        text-align: left;
-      }
-  
-      .drop-zone {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        min-height: 150px;
-      }
-  
-      .drop-zone.drag-over {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-  
-      .instructions {
-        margin-bottom: 20px;
-        font-size: 1rem;
-        color: #cccccc;
-      }       .footer {
-            width: 100%;
-            background-color: #333;
-            color: #fff;
-            padding: 50px 420px 2%;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 3in;
-        }
+    .navbar-main {
+      width: 100%;
+      margin-top: 0%;
+      position: fixed;
+      background-color: #292929;
+    }
 
-        .footer-logo {
-            max-width: 200px;
-            max-height: 200px;
-            width: auto;
-            height: auto;
-            padding-bottom: 13%;
-            padding-left: 20%;
-        }
+    .container {
+      width: 80%;
+      max-width: 1000px;
+      text-align: center;
+      padding-top: 5%;
 
-        .footer-links {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            width: calc(100% - 50px); /* Adjust this width based on logo size */
-            padding-left: 10%;
-        }
+    }
 
-        .footer-links div {
-            margin-right: 30px;
-            flex: 1;
-        }
+    h1 {
+      margin-bottom: 10px;
+    }
 
-        .footer-links ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .radio-buttons,
+    .drop-zone {
+      border: 2px dashed #ffffff;
+      padding: 30px;
+      margin-bottom: 20px;
+      transition: background-color 0.3s;
+      border-radius: 8px;
+      width: 100%;
+    }
 
-        .footer-links ul li {
-            margin-bottom: 8px;
-        }
+    .radio-buttons {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
 
-        .footer-links ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-        }
+    .radio-buttons label {
+      text-align: left;
+    }
 
-        .footer-links ul li a:hover {
-            text-decoration: underline;
-        }
+    .drop-zone {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 150px;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .instructions {
+      margin-bottom: 20px;
+      font-size: 1rem;
+      color: #cccccc;
+    }
+
+    .footer {
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 50px 420px 2%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      position: fixed;
+      bottom: 0px;
+      justify-content: space-between;
+      max-height: 2in;
+    }
+
+    .footer-logo {
+      max-width: 150px;
+      min-height: auto;
+      width: auto;
+      height: auto;
+      padding-bottom: 1%;
+      padding-left: 1%;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: calc(100% - 50px);
+      /* Adjust this width based on logo size */
+      padding-left: 10%;
+    }
+
+    .footer-links div {
+      margin-right: 30px;
+      flex: 1;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 2px;
+    }
+
+    .footer-links ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 10px;
+    }
+
+    .footer-links ul li a:hover {
+      text-decoration: underline;
+    }
     </style>
 
 </head>
@@ -151,12 +160,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
-          <a class="nav-link" href="#home">Home</a>
-          <a class="nav-link" href="#about">About</a>
-          <a class="nav-link" href="#music">Music</a>
-          <a class="nav-link" href="#sample-packs">Sample Packs</a>
-          <a class="nav-link" href="#contact">Contact</a>
-  
+          <a class="nav-link" href="./INDEX.HTML">Home</a>
+          <a class="nav-link" href="./raster.html">Raster</a>
+          <a class="nav-link" href="./vector.html">Vector</a>
+          <a class="nav-link" href="./audio.html">audio</a>
+          <a class="nav-link" href="./video.html">Video</a>
+          <a class="nav-link" href="./code.html">Code</a>
+          <a class="nav-link" href="#">Contact</a>
           <a class="nav-link" href="mailto:example@gmail.com"><i class="fas fa-envelope"></i></a>
           <a class="nav-link" href="https://github.com/"><i class="fab fa-github"></i></a>
         </div>
