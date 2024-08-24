@@ -5,201 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>X2X Audio File Converter</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/3.0.9/canvg.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/filer.css">
 
-  <style>
-    body {
-      background-color: #121212;
-      color: #ffffff;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      margin-bottom: 30%;
-    }
-
-    a {
-      font-size: 14px;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      color: #ebd29d !important;
-    }
-
-    .navbar-main {
-      width: 100%;
-      margin-top: 0%;
-      position: fixed;
-      background-color: #292929;
-    }
-
-    .container {
-      width: 80%;
-      max-width: 1000px;
-      text-align: center;
-      padding-top: 5%;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    .radio-buttons,
-    .drop-zone {
-      border: 2px dashed #bdbdbd;
-      padding: 30px;
-      margin-bottom: 20px;
-      transition: background-color 0.3s;
-      border-radius: 8px;
-      width: 100%;
-    }
-
-    .radio-buttons {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
-    }
-
-    .radio-buttons label {
-      text-align: left;
-    }
-
-    .drop-zone {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      min-height: 150px;
-    }
-
-    .drop-zone.drag-over {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .instructions {
-      margin-bottom: 20px;
-      font-size: 1rem;
-      color: #cccccc;
-    }
-
-    /* Updated Footer Styles */
-    .footer {
-      width: 100%;
-      background-color: #333;
-      color: #c7c7c7;
-      padding: 20px 30.5%;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      position: fixed;
-      bottom: 0;
-      justify-content: space-evenly;
-      max-height: 2in;
-    }
-
-    .footer-column {
-      flex: 1;
-      margin: 1px 1px;
-      padding: 1px 1px;
-    }
-
-    .footer-bar {
-      max-width: 1px;
-      background-color: #ffffff;
-      /* Vertical bar color */
-      /* margin-left:  10% ;
-    margin-right:  10% ; */
-      /* padding-left:  -20% ;
-    padding-right:  -20% ; */
-    }
-
-    .footer h3 {
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    .footer ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .footer ul li {
-      margin-bottom: 5px;
-    }
-
-    .footer ul li a {
-      color: #a3a3a3;
-      text-decoration: none;
-      font-size: 10px;
-    }
-
-    .footer ul li a:hover {
-      text-decoration: underline;
-      color: #ebd29d;
-    }
-
-    .footer-logo {
-      max-width: 100px;
-      min-height: auto;
-      width: auto;
-      height: auto;
-      padding-bottom: 1%;
-      padding-left: 1%;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      width: calc(100% - 50px);
-      /* Adjust this width based on logo size */
-      padding-left: 10%;
-    }
-
-    .footer-links div {
-      margin-right: 30px;
-      flex: 1;
-    }
-
-    .footer-links ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .footer-links ul li {
-      margin-bottom: 2px;
-    }
-
-    .footer-links ul li a {
-      color: #a3a3a3;
-      text-decoration: none;
-      font-size: 10px;
-
-    }
-
-    .footer-links ul li a:hover {
-      color: #ebd29d;
-      text-decoration: underline;
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/ffmpeg.js/ffmpeg.min.js"></script>
+  
 </head>
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-main">
-    <a class="navbar-brand" href="#">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-main">
+  <a class="navbar-brand" href="#">
       <svg width="155.00208px" height="24.001709px" viewBox="0 0 155.00208 24.001709" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 0L155 0L155 23.9996L0 23.9996L0 0Z" id="Rectangle" fill="none" fill-rule="evenodd" stroke="none" />
         <g id="Group">
@@ -208,23 +24,25 @@
           <path d="M0 16.6583L9.15571 0.721132L12.8394 0.721132L3.68374 16.6583L0 16.6583L0 16.6583ZM8.22584 16.6583L17.3815 0.721132L21.0653 0.721132L11.9096 16.6583L8.22584 16.6583L8.22584 16.6583Z" id="Group" fill="#F55139" fill-rule="evenodd" stroke="none" />
         </g>
       </svg>&nbsp; | &nbsp;X2X Conversion Suite</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ml-auto">
-        <a class="nav-link" href="./INDEX.HTML">Home</a>
-        <a class="nav-link" href="./raster.html">Raster</a>
-        <a class="nav-link" href="./vector.html">Vector</a>
-        <a class="nav-link" href="./audio.html">audio</a>
-        <a class="nav-link" href="./video.html">Video</a>
-        <a class="nav-link" href="./code.html">Code</a>
-        <a class="nav-link" href="#">Contact</a>
-        <a class="nav-link" href="mailto:example@gmail.com"><i class="fas fa-envelope"></i></a>
-        <a class="nav-link" href="https://github.com/"><i class="fab fa-github"></i></a>
-      </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto">
+      <a class="nav-link" href="./index.html">Home</a>
+      <a class="nav-link" href="./raster.html">Raster</a>
+      <a class="nav-link" href="./vector.html">Vector</a>
+      <a class="nav-link" href="./audio.html">audio</a>
+      <a class="nav-link" href="./video.html">Video</a>
+      <a class="nav-link" href="./code.html">Code</a>
+      <a class="nav-link" href="#">Contact</a>
+      <a class="nav-link" href="mailto:example@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a class="nav-link" href="https://github.com/"><i class="fab fa-github"></i></a>
     </div>
-  </nav>
+  </div>
+</nav>
+<!-- body container -->
   <div class="container">
     <h1>X2X Audio File Converter</h1>
     <p>Choose your output option and drag and drop files. They will
@@ -241,71 +59,61 @@
     </div>
   </div>
   <footer class="footer">
-    <img src="logo.svg" alt="Logo" class="footer-logo">
-    <!-- Replace 'your-logo.png' with your actual logo file -->
+    <img src="logo.svg" alt="Logo" class="footer-logo"> <!-- Replace 'your-logo.png' with your actual logo file -->
     <div class="footer-links">
       <div class="footer-bar"></div>
-      <div>
-        <ul>
-          <li><a href="https://soundcloud.com/user-999486594">Soundcloud</a></li>
-          <li><a href="https://github.com/Kohlyde">GitHub</a></li>
-          <li><a href="https://soundcloud.com/user-999486594">Facebook</a></li>
-          <li><a href="https://soundcloud.com/user-999486594">Twitch</a></li>
-          <li><a href="https://soundcloud.com/user-999486594">Purchase
-              Songs</a></li>
-          <li><a href="https://soundcloud.com/user-999486594">Song
-              Player</a></li>
-        </ul>
-      </div>
-      <div class="footer-bar"></div>
-      <div>
+        <div>
+            <ul>
+                <li><a href="https://soundcloud.com/user-999486594">Soundcloud</a></li>
+                <li><a href="https://github.com/Kohlyde">GitHub</a></li>
+                <li><a href="https://soundcloud.com/user-999486594">Facebook</a></li>
+                <li><a href="https://soundcloud.com/user-999486594">Twitch</a></li>
+                <li><a href="https://soundcloud.com/user-999486594">Purchase Songs</a></li>
+                <li><a href="https://soundcloud.com/user-999486594">Song Player</a></li>
+            </ul>
+        </div>
+        <div class="footer-bar"></div>
+        <div>
+            
+            <ul>
+                <li><a href="raster.html" target="_blank">Raster Converter</a></li>
+                <li><a href="vector.html" target="_blank">Vector Converter</a></li>
+                <li><a href="audio.html" target="_blank">Audio Converter</a></li>
+                <li><a href="video.html" target="_blank">Video Converter</a></li>
+                <li><a href="code.html" target="_blank">Code Converter</a></li>
+            </ul>
 
-        <ul>
-          <li><a href="raster.html" target="_blank">Raster
-              Converter</a></li>
-          <li><a href="vector.html" target="_blank">Vector
-              Converter</a></li>
-          <li><a href="audio.html" target="_blank">Audio
-              Converter</a></li>
-          <li><a href="video.html" target="_blank">Video
-              Converter</a></li>
-          <li><a href="code.html" target="_blank">Code
-              Converter</a></li>
-        </ul>
+        </div>
+        <div class="footer-bar"></div>
+        <div>
+            
+            <ul>
+                <li><a href="raster.html" target="_blank">Raster Converter</a></li>
+                <li><a href="vector.html" target="_blank">Vector Converter</a></li>
+                <li><a href="audio.html" target="_blank">Audio Converter</a></li>
+                <li><a href="video.html" target="_blank">Video Converter</a></li>
+                <li><a href="code.html" target="_blank">Code Converter</a></li>
+            </ul>
 
-      </div>
-      <div class="footer-bar"></div>
-      <div>
-
-        <ul>
-          <li><a href="raster.html" target="_blank">Raster
-              Converter</a></li>
-          <li><a href="vector.html" target="_blank">Vector
-              Converter</a></li>
-          <li><a href="audio.html" target="_blank">Audio
-              Converter</a></li>
-          <li><a href="video.html" target="_blank">Video
-              Converter</a></li>
-          <li><a href="code.html" target="_blank">Code
-              Converter</a></li>
-        </ul>
-
-      </div>
-      <div class="footer-bar"></div>
-      <div>
-        <ul>
-          <li><a href="OpenSource.html" target="_blank">Open
-              Source</a></li>
-          <li><a href="PrivacyPolicy.html" target="_blank">Privacy
-              Policy</a></li>
-          <li><a href="DataPolicy.html" target="_blank">Data
-              Policy</a></li>
-          <li><a href="OCookiesPolicy.html" target="_blank">Cookies Policy</a></li>
-          <li><a href="PoliciesPolicy.html" target="_blank">Policies Policy</a></li>
-        </ul>
-      </div>
+        </div>
+        <div class="footer-bar"></div>
+        <div>
+            <ul>
+                <li><a href="OpenSource.html" target="_blank">Open Source</a></li>
+                <li><a href="PrivacyPolicy.html" target="_blank">Privacy Policy</a></li>
+                <li><a href="DataPolicy.html" target="_blank">Data Policy</a></li>
+                <li><a href="OCookiesPolicy.html" target="_blank">Cookies Policy</a></li>
+                <li><a href="PoliciesPolicy.html" target="_blank">Policies Policy</a></li>
+            </ul>
+        </div>
     </div>
-  </footer>
+</footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/3.0.9/canvg.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ffmpeg.js/ffmpeg.min.js"></script>
   <script>
     async function convertAudio(file) {
       try {
