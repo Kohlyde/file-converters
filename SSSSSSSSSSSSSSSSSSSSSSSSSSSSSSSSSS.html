@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en" class="no-compositor-scroll">
+<head>
+<!-- title for PDF ROL scroll update's identification -->
+<title>PDF Document</title>
+<style>
+body,
+html {
+  height: 100%;
+  margin: 0;
+  width: 100%;
+  /* This helps ensure scrollbar colors inside OOPIF are updated to match the
+  theme. */
+  color-scheme: light dark;
+}
+
+.no-compositor-scroll {
+  /* A background that's fixed in viewport to force Blink to scroll on main
+  thread. */
+  background: linear-gradient(transparent, transparent) fixed;
+  /* Setting border none to force Blink to scroll on main thread. As the above
+  change broke with CompositeBackgroundAttachmentFixed getting enabled by
+  default in upstream.
+  https://chromium-review.googlesource.com/c/chromium/src/+/4443473
+  https://chromium-review.googlesource.com/c/chromium/src/+/4641397 */
+  border: none;
+  border-radius: 1px;
+}
+
+embed {
+  left: 0;
+  margin: 0;
+  top: 0;
+}
+
+.fixed-embed {
+ position: fixed;
+ height: 100%;
+ width: 100%;
+}
+
+.absolute-embed {
+ position: absolute;
+ min-height: 100%;
+ min-width: 100%;
+}
+
+.pdf-content-view-root-fixed {
+  left: 0;
+  position: fixed;
+  top: 0;
+}
+
+.pdf-content-view-root-relative {
+  left: 0;
+  position: relative;
+  top: 0;
+}
+
+/* These rules are active only in PDF fullscreen mode */
+html.fullscreen-mode {
+  overflow: hidden;
+  /* Disable overscroll history navigation */
+  touch-action: none;
+}
+
+html.fullscreen-mode #ui-container {
+  display: none;
+}
+
+html.fullscreen-mode #pdf-embed {
+  clip-path: inset(
+    calc(var(--y-clip-start) * var(--page-scale)) 0
+    calc(var(--y-clip-end) * var(--page-scale)) 0
+  );
+  background-color: #333;
+}
+
+/* TODO(37810027): Reuse dark mode styles above instead of duplicating them */
+html.fullscreen-mode {
+  background-color: #333;
+  color: #FFF;
+}
+
+html.fullscreen-mode #embed-border {
+  border: 2px #787878 solid;
+}
+
+#sizer {
+  position: absolute;
+}
+
+#internal-document-container {
+  user-select: none;
+}
+
+</style>
+<style>/*************************************************************************
+ *
+ *  Copyright 2021 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+.Oddl1utlMoNuv61EjBcF {
+  margin: auto;
+  position: absolute !important;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+</style><style>/*************************************************************************
+ *
+ *  Copyright 2021 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+.GsIfgY0lIuAlDSkwm8mL {
+  box-sizing: border-box;
+  outline-offset: 2px;
+  overflow-wrap: break-word;
+  padding: 3px 1px 3px 1px;
+  resize: none;
+}
+
+.sVfMzMMBDI3gY8s5cdGh {
+  box-sizing: border-box;
+  outline-offset: 2px;
+  padding: 0 1px 0 1px;
+}
+
+.sVfMzMMBDI3gY8s5cdGh::-ms-clear {
+  display: none;
+}
+
+.ILZW8o_Pdbkvki8i669Y {
+  position: absolute;
+}
+
+._eRzkBRC0R3VURGHwGT7 {
+  position: absolute;
+}
+
+.t1rhizkgKGtH8WPHnqvc {
+  box-sizing: border-box;
+}
+</style><style>/*************************************************************************
+ *
+ *  Copyright 2021 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+.VgBTPYWI5xr_2LqOWB7F {
+  pointer-events: none;
+}
+</style><style>/*************************************************************************
+ *
+ *  Copyright 2021 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+.MNENsV7k9g3c0KPChmM2 {
+  box-sizing: border-box;
+  font-size: initial;
+  padding: 0;
+  position: absolute;
+  outline-offset: 2px;
+}
+
+.dxfgCpjeEo1X9NR123K2 {
+  box-sizing: border-box;
+}
+
+.mJUqifJUtlZpqjaIujA7 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.zrzvwCJFujPc23w1QlOd {
+  position: absolute;
+}
+
+.NDCs1PhJx4Yxq9G9ftaQ {
+  position: absolute;
+}
+
+.cPvc5yi2EbjhJxIb0N0I {
+  font-size: 0;
+}
+</style><style>/*************************************************************************
+ *
+ *  Copyright 2021 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+.vw_eUHK0iwLkQ1r0xdrA {
+  box-sizing: border-box;
+  font-size: 5px;
+  outline-offset: 2px;
+}
+
+.HQrNmJOPwVBLHSexSwCv {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.iORl9dWx6N0F9WI8wQfk {
+  box-sizing: border-box;
+
+  /* border-radius: 50%; */
+}
+
+.MyRE5vOJuDcGxTA6LVgN {
+  border-radius: 50%;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.aJBvejKp2p5menxIodAM {
+  position: absolute;
+}
+
+.oUmO9uZlERDbqVXSKCtZ {
+  position: absolute;
+}
+
+.PTXg_Uq_1ZdbC2tS75Dm {
+  font-size: 0;
+}
+</style><style>/*************************************************************************
+ *
+ *  Copyright 2021 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+.b9hWCr44fzO5d203iIrW {
+  position: absolute;
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+.ZIjJ6rv3UI0wiqFz0e8s:hover {
+  background: #99c1da;
+}
+
+.dwft6vVZDq0azZYlf0Gd {
+  box-sizing: border-box;
+}
+
+.LW0EoG9qbHmAmk5SCiP2 {
+  font-size: 0;
+  opacity: 0;
+}
+</style><style>/*************************************************************************
+ *
+ *  Copyright 2021 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+.ZtLywEVqriFOl6HD7ql3 {
+  box-sizing: border-box;
+  outline: none;
+  position: absolute;
+}
+
+.ZtLywEVqriFOl6HD7ql3::-ms-clear {
+  display: none;
+}
+
+.Qxq57a8rs209iY9n2Dt8 {
+  position: absolute;
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+.Qxq57a8rs209iY9n2Dt8:focus {
+  outline: none;
+}
+
+.MUGFCKeq85akam9KZKHz:hover {
+  background: #99c1da;
+}
+
+.LrBWU49vk96MM4kLjHKg {
+  box-sizing: border-box;
+  outline-offset: 2px;
+  position: absolute;
+}
+
+.tdf8mrd710Thx5ZjnUOV {
+  position: absolute;
+}
+
+.ABB1nEBFxJHXmYrSzm4j {
+  position: absolute;
+}
+</style><style>/*************************************************************************
+ *
+ *  Copyright 2021 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+.FtOkyzDGQ3lI1hwEAxag {
+  background: transparent;
+  border: 0;
+  outline: none;
+  padding: 0;
+  position: absolute;
+}
+
+.BvrbQ_XyiRtKl0EYuTxr {
+  box-sizing: border-box;
+}
+
+.t4Ma2UWXbHC4Q9VoOBI4 {
+  position: absolute;
+}
+
+.sPvOWNjOjTlee042NiY9 {
+  font-size: 0;
+}
+</style><style>/*************************************************************************
+ *
+ *  Copyright 2022 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+
+.ebLR_7750e3fJDq9j2fh {
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+</style><style>/*************************************************************************
+ *
+ *  Copyright 2021 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe.
+ **************************************************************************/
+
+.Lr_fJ1XhkctpinwzhXx1 {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+</style></head>
+<body class="no-compositor-scroll">
+<div id="sizer"></div>
+<div id="internal-document-container">
+<embed id="pdf-embed" type="application/x-google-chrome-pdf" src="chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/8f8a2f30-f2db-4f43-9d46-4b93815ab8f7" original-url="file:///C:/Users/coalesce/3D%20Objects/eeeeee.pdf" background-color="4281545523" embed-top-offset="41" javascript="allow" full-frame="" pdfdigsigpolicyenabled="" pdffreetextenabled="" pdfviewrecoveryenabled="" pdfoopifscrollbarenabled="" pdffastscrollenabled="" stream_timestamp="720541917816" first-page-separator="4" class="absolute-embed" height="1137" width="803">
+</div>
+
+<!-- Container div for react-based PDF content view UI components -->
+<div id="pdf-content-view-root" class="pdf-content-view-root-relative"></div>
+
+<!-- pdf-error-reporting.js -->
+<script src="chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/edge_pdf/pdf-error-reporting.js"></script>
+<!-- pdf_internal_plugin.bundle.js -->
+<script src="chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/edge_pdf/dist/pdf_internal_plugin.bundle.js"></script>
+
+<!-- These scripts are added as a template prevent loading/parsing/executing
+     them on page load. They will be initialized in UI when needed. -->
+
+  <!-- lib_react.chunk.js -->
+  <script src="chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/edge_pdf/dist/lib_react.chunk.js"></script>
+  <!-- lib_fast_deprecated.chunk.js -->
+  <script src="chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/edge_pdf/dist/lib_fast_deprecated.chunk.js"></script>
+  <!-- lib_fast_web_components.chunk.js -->
+  <script src="chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/edge_pdf/dist/lib_fast_web_components.chunk.js"></script>
+  <!-- pdf_content_view.bundle.js -->
+  <script src="chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/edge_pdf/dist/pdf_content_view.bundle.js"></script>
+
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
