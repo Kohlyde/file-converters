@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en US">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>xTypes + Directory to JSON Tool</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: grey;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .drop-zone {
+      width: 80%;
+      height: 80%;
+      border: 2px dashed #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      transition: background-color 0.3s;
+    }
+
+    .drop-zone.drag-over {
+      background-color: rgba(255, 255, 255, 0.1);   justify-content: center;
+      align-items: center;
+    }
+
+    .drop-zone p {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 12px;
+      color: grey;
+    }
+    .disclaimer{ 
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="drop-zone" id="dropZone">
+    <div class="disclaimer">
+    <h2>Drop Zone - Drop one item or whole directories.</h2>
+    <p id="total-files">Total Files: 0</p>
+    <p id="total-directories">Total Directories: 0</p>
+ 
+      <h3>Quick File Upload Guidelines</h3>
+      <ul>
+        <li><strong>Max File Size:</strong> 500 MB (JSON).</li>
+        <li><strong>Directory Depth:</strong> Too many nested folders may cause errors.</li>
+        <li><strong>Path Length:</strong> Windows: 260 chars, Unix/Linux: 4096 chars.</li>
+        <li><strong>File Name Length:</strong> Up to 255 chars.</li>
+      </ul>
+      <p>Uploading large or complex files? Understand the limits!</p>
+    </div>
+  </div>
+
+  <!-- Elements to display the running totals -->
+  <br>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropZone = document.getElementById('dropZone');
+      const totalFilesElement = document.getElementById('total-files'); // Element to display the total files count
+      const totalDirectoriesElement = document.getElementById('total-directories'); // Element to display the total directories count
+
+      let fileCounter = 0; // Incremental ID counter for session
+      let directoryCounter = 0; // Counter for directories
+
+      // Retrieve grand total from localStorage or initialize if not set
+      let grandTotalFiles = parseInt(localStorage.getItem('grandTotalFiles')) || 0;
+      let grandTotalDirectories = parseInt(localStorage.getItem('grandTotalDirectories')) || 0;
+
+      // Update the display with the current totals
+      updateDisplay(grandTotalFiles, grandTotalDirectories);
+
+      dropZone.addEventListener('dragover', (event) => {
+        try {
+          event.preventDefault();
+          dropZone.classList.add('dragging');
+        } catch (error) {
+          console.error('Error during dragover event:', error);
+        }
+      });
+
+      dropZone.addEventListener('dragleave', () => {
+        try {
+          dropZone.classList.remove('dragging');
+        } catch (error) {
+          console.error('Error during dragleave event:', error);
+        }
+      });
+
+      dropZone.addEventListener('drop', async (event) => {
+        try {
+          event.preventDefault();
+          dropZone.classList.remove('dragging');
+
+          const items = event.dataTransfer.items;
+          const fileData = await processItems(items);
+
+          const jsonOutput = JSON.stringify(fileData, null, 2);
+          downloadJSON(jsonOutput, 'output.json');
+
+          // Update localStorage with the new grand total
+          localStorage.setItem('grandTotalFiles', grandTotalFiles);
+          localStorage.setItem('grandTotalDirectories', grandTotalDirectories);
+
+          // Update the display with new totals
+          updateDisplay(grandTotalFiles, grandTotalDirectories);
+
+        } catch (error) {
+          console.error('Error during drop event:', error);
+        }
+      });
+
+      async function processItems(items) {
+        try {
+          const result = {};
+
+          for (let i = 0; i < items.length; i++) {
+            const item = items[i].webkitGetAsEntry();
+            if (item) {
+              await traverseFileTree(item, result);
+            }
+          }
+
+          return result;
+        } catch (error) {
+          console.error('Error processing items:', error);
+        }
+      }
+
+      async function traverseFileTree(item, result) {
+        try {
+          if (item.isFile) {
+            const file = await new Promise((resolve) => item.file(resolve));
+            const fileInfo = await convertFile(file);
+            fileInfo.id = ++fileCounter; // Incremental ID
+            fileInfo.timestamp = new Date().toISOString(); // Timestamp
+            fileInfo.filename = file.name; // Original filename
+            result[item.fullPath] = fileInfo;
+
+            // Increment counters
+            grandTotalFiles++;
+          } else if (item.isDirectory) {
+            const dirReader = item.createReader();
+            const entries = await new Promise((resolve) => dirReader.readEntries(resolve));
+
+            directoryCounter++;
+            grandTotalDirectories++;
+
+            for (let i = 0; i < entries.length; i++) {
+              await traverseFileTree(entries[i], result);
+            }
+          }
+        } catch (error) {
+          console.error('Error traversing file tree:', error);
+        }
+      }
+
+      async function convertFile(file) {
+        try {
+          return new Promise((resolve) => {
+            const reader = new FileReader();
+            const fileType = file.type;
+
+            // Dynamically handle all file types
+            if (fileType.startsWith('text/')) {
+              reader.onload = () => resolve({
+                content: reader.result,
+                type: 'text'
+              });
+              reader.readAsText(file);
+            } else if (fileType.startsWith('image/')) {
+              reader.onload = () => resolve({
+                content: reader.result,
+                type: 'image'
+              });
+              reader.readAsDataURL(file);
+            } else if (fileType.startsWith('audio/') || fileType.startsWith('video/')) {
+              reader.onload = () => resolve({
+                content: reader.result,
+                type: fileType.includes('audio') ? 'audio' : 'video'
+              });
+              reader.readAsDataURL(file);
+            } else if (fileType.startsWith('application/')) {
+              reader.onload = () => resolve({
+                content: reader.result,
+                type: 'application'
+              });
+              reader.readAsArrayBuffer(file);
+            } else if (fileType === '' && file.name.endsWith('.svg')) { // Special case for SVG files
+              reader.onload = () => resolve({
+                content: reader.result,
+                type: 'image/svg+xml'
+              });
+              reader.readAsText(file);
+            } else {
+              // Default handling for unknown types
+              reader.onload = () => resolve({
+                content: reader.result,
+                type: 'binary'
+              });
+              reader.readAsArrayBuffer(file);
+            }
+          });
+        } catch (error) {
+          console.error('Error converting file:', error);
+        }
+      }
+
+      function downloadJSON(content, fileName) {
+        try {
+          const a = document.createElement('a');
+          const file = new Blob([content], {
+            type: 'application/json'
+          });
+          a.href = URL.createObjectURL(file);
+          a.download = fileName;
+          a.click();
+          URL.revokeObjectURL(a.href);
+        } catch (error) {
+          console.error('Error downloading JSON file:', error);
+        }
+      }
+
+      function updateDisplay(totalFiles, totalDirectories) {
+        totalFilesElement.textContent = `Total Files: ${totalFiles}`;
+        totalDirectoriesElement.textContent = `Total Directories: ${totalDirectories}`;
+      }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropZone = document.getElementById('dropZone');
+      let fileCounter = 0; // Incremental ID counter for session
+      let directoryCounter = 0; // Counter for directories
+
+      dropZone.addEventListener('drop', async (event) => {
+        try {
+          event.preventDefault();
+          dropZone.classList.remove('dragging');
+
+          const items = event.dataTransfer.items;
+          const fileData = await processItems(items);
+
+          const jsonOutput = JSON.stringify(fileData, null, 2);
+          downloadJSON(jsonOutput, 'output.json');
+
+          // Send data to server or a service endpoint
+          await sendDataToServer(fileCounter, directoryCounter);
+        } catch (error) {
+          console.error('Error during drop event:', error);
+        }
+      });
+
+      async function sendDataToServer(fileCount, dirCount) {
+        try {
+          await fetch('https://your-endpoint.com/update', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              files: fileCount,
+              directories: dirCount
+            })
+          });
+        } catch (error) {
+          console.error('Error sending data to server:', error);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
